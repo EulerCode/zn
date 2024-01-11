@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- oncontextmenu="return false;" -->
+
+<head>
+	<meta charset="UTF-8">
+
+
+	<link rel="icon" href="/favicon.png" type="image/x-icon">
+	<meta name="viewport"
+		content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Gayathri&display=swap" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
+		type="text/javascript"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
+	<link rel='stylesheet'
+		href='https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
+	<link rel="stylesheet" href="./stylesPago.css">
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<script src="https://kit.fontawesome.com/67821f8363.js" crossorigin="anonymous"></script>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css'> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="../globals.js"></script>
+	<script src="./senders.js"></script>
+	<script src="https://smtpjs.com/v3/smtp.js"></script><!--  enviar email -->
+
+
+
+
+</head>
+
+<body>
+	<a href="/">
+		<div id="encabezado">
+			<img id="enca" src="compraSegura.jpg">
+			<p><span>Zona Sneakers</span></p>
+		</div>
+	</a>
+
+	<!--  ver detalles -->
+
+	<div id="detalles" class="details-container" onclick="toggleDetails()">
+		<div class="header">
+			<div>
+				<i class="fa-regular fa-circle-down arrow-icon"></i>
+				Ver detalles de mi compra
+			</div>
+			<div id="import">$00</div>
+		</div>
+		<div class="content" id="detailsContent">
+			<b>
+				<pre id="pedido" style="background: none;">Vacío</pre>
+			</b>
+			<div id="dataCompra">
+				<p>Subtotal:<b><a id="subtotal" style="font-size: 1em;"></a></b></p>
+				<p>Costo de envío:<b><a id="CostoEnvio" style="font-size: 1em;"></a></b></p>
+				<b>
+					<p style="font-size: 1.3em;">Total:<a id="total"></a></p>
+				</b>
+			</div>
+
+		</div>
+	</div>
+	<script>
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		let productoss = urlParams.get('product');
+		let subtotal = urlParams.get('precio');
+		let CostodeEnvio = urlParams.get('CostoEnvio');
+		let totale = urlParams.get('CostoTotal');
+		document.getElementById('subtotal').innerHTML = " $" + subtotal;
+		document.getElementById('CostoEnvio').innerHTML = " $" + CostodeEnvio;
+		document.getElementById('total').innerHTML = " $" + totale;
+		document.getElementById('import').innerHTML = " $" + totale;
+
+		function toggleDetails() {
+			var container = document.querySelector('.details-container');
+			container.classList.toggle('active');
+		}
+
+		// Obtener el carrito desde localStorage
+		var carrito = JSON.parse(localStorage.getItem('cart')) || {};
+
+		// Obtener el carrito desde localStorage
+		var carrito = JSON.parse(localStorage.getItem('cart')) || {};
+
+		// Función para mostrar elementos del carrito
+		function mostrarElementosCarrito() {
+			var pedidoElement = document.getElementById('pedido');
+
+			// Limpiar contenido previo
+			pedidoElement.innerHTML = '';
+
+			// Verificar si el carrito está vacío
+			if (Object.keys(carrito).length === 0) {
+				pedidoElement.innerText = 'Vacío';
+				return;
+			}
+
+			// Iterar sobre los elementos del carrito y mostrarlos
+			for (var producto in carrito) {
+				if (carrito.hasOwnProperty(producto)) {
+					var cantidad = carrito[producto].quantity;
+					var precioUnitario = carrito[producto].price;
+					var subtotal = cantidad * precioUnitario;
+
+					// Limitar la longitud del nombre y agregar puntos suspensivos si es necesario
+					var nombreCorto = producto.length > 20 ? producto.substring(0, 32) + '.' : producto;
+
+					// Mostrar el nombre y el precio del producto con estilo de flexbox
+					for (var i = 0; i < cantidad; i++) {
+						pedidoElement.innerHTML += `<div class="producto"><span>${nombreCorto}</span><span>$${precioUnitario.toFixed(3)}</span></div>`;
+					}
+				}
+			}
+		}
+
+		// Llamar a la función para mostrar los elementos del carrito
+		mostrarElementosCarrito();
+
+	</script>
+
+
+
+	<script> //ATENIONNN Script para recibir parametros en el link y procesar la info
+
+
+		const producto = urlParams.get('product');
+		const CostoEnvio = urlParams.get('envPrecio');
+		const total = urlParams.get('total');
+
+
+	</script>
+
+
+
+	<div id="tabs" class="tabs-wrapper">
+
+		<ul style="font-family: 'Poppins', sans-serif; padding: 3px 1px; ">
+			<li style="background-color: #ef4011; border:none;font-weight: 600;"><a
+					href="#t1"><span>Transferencia</span></a></li>
+			<li style="background-color: #ef4011; border:none;font-weight: 600;"><a href="#t2"><span>Efectivo</span></a>
+			</li>
+			<li style="background-color: #ef4011; border:none;font-weight: 600;"><a href="#t3"><span>Tarjeta</span></a>
+			</li>
+		</ul>
+
+		<div id="t1" style="padding-top:0%;">
+			<div class="form-group" align="left">
+				<br>
+				<img style="position: relative;	width: 100%;background: #f0f0f0;padding: 10px 20px;border-radius: 8px;"
+					src="img/logosPago.png"></img>
+
+				<br><br>
+				<p
+					style="font-family: 'Poppins', sans-serif;margin-left:  1.5em; text-indent: -1.4em; word-spacing:1px; text-align: left;font-size:1.3rem; color: #fff;font-weight: 700;">
+					1- Click en copiar.</p>
+				<div id="cop" class="input-group" style="margin-top:2%;" onclick="Copiar()">
+					<input style="position:relative; width:100%;color: #ef4011;font-family: 'Poppins', sans-serif;
+					letter-spacing: 1px; background: none; border: solid 1px #ef4011" placeholder="" class="form-control" id="CBU2"
+						type="text" readonly>
+					<span class="input-group-addon" style="color: #ef4011;
+					border: solid 1px #ef4011;
+					background: none;
+					font-family: 'Poppins', sans-serif;">Copiar <i class="glyphicon glyphicon-copy"></i></span>
+				</div>
+				<br>
+				<p
+					style="font-family: 'Poppins', sans-serif;margin-left:  1.5em; text-indent: -1.4em; word-spacing:1px; text-align: left;font-size:1.3rem; color: #fff;font-weight: 700;">
+					2- Abra su aplicación de pagos preferida y realice una trasferencia de <span
+						style="color:#20ff20;;">$<span id="imp"></span></span></p>
+				<p
+					style="font-family: 'Poppins', sans-serif;margin-left:  1.5em; text-indent: -1.4em; word-spacing:1px; text-align: left;font-size:1.3rem; color: #fff;font-weight: 700;">
+					3- Controle que el destinatario sea correcto. Titular del cuenta: Lic. <span id="nombre"></span>.
+					<span id="marca"></span> S.A.
+				</p>
+				<p
+					style="font-family: 'Poppins', sans-serif;margin-left:  1.5em; text-indent: -1.4em; word-spacing:1px; text-align: left;font-size:1.3rem; color: #fff;font-weight: 700;">
+					4- Envie su comprobante de pago por cualquiera de nuestros medios de contacto.</p>
+
+			</div>
+
+		</div>
+
+
+		<div id="t2">
+			<div class="form-group" align="left">
+				<div style="text-align:center;"><img style="position: relative;
+					text-align: center;
+					width: 33%;
+					background: aliceblue;
+					border-radius: 5px;
+					padding: 6px;" src="img/contado.png"></img>
+
+					<br><br>
+					<p
+						style="font-family: 'Poppins', sans-serif;margin-left:  1.5em; text-indent: -1.4em; word-spacing:1px; text-align: left;font-size:1.3rem; color: #fff;font-weight: 700;">
+						1- Acercáte a una agencia de pagos y mencioná que deseas realizar una recarga de <span
+							style="color:#20ff20;">$<span id="imp2"></span>.</p>
+					<p
+						style="font-family: 'Poppins', sans-serif;margin-left:  1.5em; text-indent: -1.4em; word-spacing:1px; text-align: left;font-size:1.3rem; color: #fff;font-weight: 700;">
+						2- Dictále el siguiente número de cuenta a la persona que te atienda.</p>
+					<input value="" style="text-align: center;
+						width: 70%;
+						border: solid 1px #ef4011;
+						letter-spacing: 7px;
+						font-size: 2rem;
+						border-radius: 7px;
+						background: none;
+						color: #ef4011;" id="nCuenta"></input><br>
+					<button id="numCuenta" onclick="CopiarNumCuenta()"
+						style="font-size: 1rem;margin-top: 10px;background:none; border:1px solid #ef4011; border-radius:5px;color:#ef4011">Copiar</button>     <button
+						style="font-size: 1rem;margin-top: 10px;background:none; border:1px solid #ef4011; border-radius:5px;color:#ef4011"
+						onclick="CompartirNum()">Compartir</button>
+					<br><br>
+					<p
+						style="font-family: 'Poppins', sans-serif;margin-left:  1.5em; text-indent: -1.4em; word-spacing:1px; text-align: left;font-size:1.3rem; color: #fff;font-weight: 700;">
+						3- Tomá una foto del recibo y enviala por cualquiera de nuestros medios de contacto.</p>
+
+
+				</div>
+			</div>
+		</div>
+
+
+		<div id="t3">
+			<img style="position: relative;
+			width: 100%;
+			background-color: #f0f8ffc2;
+			border-radius: 9px;
+			padding: 0 10px;" src="img/logosTarjeta.gif"></img>
+			<br><br>
+			<div style="text-align:center;">
+				<button id="debito"
+					style="font-weight: 700;font-family: 'Poppins', sans-serif;background:none; border:1px solid #ef4011; border-radius:5px;color:#ef4011;font-size:1.5rem">Débito</button>     <button
+					id="credito"
+					style="font-weight: 700;font-family: 'Poppins', sans-serif;background:none; border:1px solid #ef4011; border-radius:5px;font-size:1.5rem;color:#ef4011">Crédito</button>
+				<br><br>
+			</div>
+			<div id="cuotas" style="text-align:center;color: rgb(210, 210, 210);">
+				<label>
+					<input type="radio" name="hosting" onclick="CuotasCant(1)" value="0" checked /> En un pago de <label
+						id="unaCuota"></label>
+				</label><br>
+				<label>
+					<input type="radio" name="hosting" onclick="CuotasCant(3)" value="0" /> En 3 coutas de <label
+						id="tresCuota"></label>
+				</label><br>
+				<label>
+					<input type="radio" name="hosting" onclick="CuotasCant(6)" value="0" /> En 6 cuotas de <label
+						id="seisCuota"></label>
+				</label>
+				<br>
+				<button id="pagarTarjeta"
+					style="font-weight: 700; background:none; border:1px solid #ef4011; border-radius:5px;font-size:1.5rem;color:#ef4011">Pagar
+					ahora</button>
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<script>
+
+		const UnaCuota = parseFloat(urlParams.get('CostoTotal'));
+		const TresCuotas = parseFloat(urlParams.get('CostoTotal') / 3);
+		const SeisCuotas = (parseFloat(urlParams.get('CostoTotal')) / 6);
+		document.getElementById('unaCuota').innerHTML = "$" + parseFloat(UnaCuota).toFixed(3);
+		document.getElementById('tresCuota').innerHTML = "$" + parseFloat(TresCuotas).toFixed(3);
+		document.getElementById('seisCuota').innerHTML = "$" + parseFloat(SeisCuotas).toFixed(3);
+
+	</script>
+
+
+	<!-- partial -->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+
+
+
+
+
+
+
+
+
+	<!-- opcion mercado pago -->
+
+	<div id="MPform" class="tabs-wrapper"
+		style="cursor: pointer; padding:1rem; margin-top:1rem;border: 1px solid  #d3ced3 ; border-radius:3px; ">
+		<img style="position: relative;width: 20%;background: white;padding: 4px;border-radius: 2px;"
+			src="img/mp.png"></img>
+		<a>   Pagar con MercadoPago</a>
+
+		<div id="MPdrop" align="center"><br><a style="  color:rgb(212, 212, 212);">Las comisiones las aplica Mercado
+				Pago</a>
+
+			<br><a><b>Importe:</b> <label style="color:#20ff20;; font-size:1.3rem;" id="importeMP"></label>
+				<a style="font-style:italic ; font-size:1.1rem;">+6% IVA incluído</a>
+				<br><button id="pagarMP"
+					style="background:none; border:1px solid #2a8cfe; border-radius:5px;color:#2a8cfe;font-size:1.4rem"><b>Pagar
+						ahora</b></button> 
+			</a>
+
+		</div>
+
+	</div>
+
+	<!-- opcion mercado pago -->
+	<script>
+		$("#MPdrop").fadeOut(0);
+
+		$(document).on('click', '#MPform', function (event) {
+
+			$("#MPdrop").fadeIn(1000);
+		});
+
+
+		const im = parseFloat(urlParams.get('CostoTotal')) + (parseFloat(parseInt(urlParams.get('CostoTotal'))) * ImporteMP);
+		document.getElementById('importeMP').innerHTML = "$" + im.toFixed(3);
+
+	</script>
+
+
+
+	<div class="btnCont">
+
+		<button class="button" id="btnCONTINUAR" data-target="modal1">Confirmar pago</button>
+
+		<div class="modal" id="modal1">
+			<div class="modal_inner" style="padding: 8%;">
+				<p style="font-weight: 600; font-size: 15px;text-align: center;text-indent:15px">Al confirmar el pago,
+					usted está generando una orden con su pedido y su
+					información de envío, la cual nos llegará de inmediato. Recuerde que el pedido no será preparado ni
+					despachado hasta que hayamos recibido el pago correspondiente en nuestros sistemas.</p>
+				<p>Muchas gracias por elegirnos.</p>
+				<button id="confirmar" type="button" style="padding: 9px 36px 12px 34px;width: 100%;"
+					onclick="sendEmail()">Confirmar</button>
+			</div>
+
+		</div>
+
+	</div>
+	<!-- <script src="./btnContinuar.js"></script> -->
+	<script src="./scriptsPago.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- seteo ventana pago en efectivo, con variables globales -->
+	<script>
+		document.getElementById("imp").innerHTML = urlParams.get('CostoTotal') - descuento;
+		document.getElementById("imp2").innerHTML = urlParams.get('CostoTotal') - descuento;
+		$(document).on('click', '#btnEfectivo', function (event) {
+			document.getElementById("imp").innerHTML = urlParams.get('CostoTotal') - descuento;
+		});
+
+
+		document.getElementById('CBU2').value = cbu;
+		document.getElementById('nCuenta').value = Ncuenta;
+		document.getElementById('numCuenta').value = Ncuenta;
+		document.getElementById("marca").innerHTML = marca;
+		document.getElementById("nombre").innerHTML = titular;	
+	</script>
+
+
+
+ 
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+</script>

@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f5f5;
+  color: #333; 
+}
+
+ /* ENCABEZADO */
+
+ #IconMenu-y-Cart {
+  width: 90%;
+  top:6%;
+	left: 5%;
+	color: white;
+	position: absolute; 
+	z-index: 1;
+	display: flex;
+	justify-content: space-between; 
+
+}
+
+#notify {
+	background: #fff;
+	border-radius: 5px;
+	position: relative;
+	left: 9%;
+	font-size: 11px;
+	text-align: center;
+	padding: 2px;
+	color: black;
+	margin-top: 4px;
+}
+
+ #encabezado {
+	position: relative;
+  text-align: center;
+  background-color:  #090d00;;
+}
+
+#encabezado p {
+  color: burlywood;
+	text-transform: uppercase;
+	letter-spacing: 0.5em;
+	display: inline-block; 
+	padding: 1.5em 0em;
+	position: relative; 
+	width: 40em; 
+	font-size: 9px;
+}
+#encabezado p span {
+  font: 700 4em/1 "Oswald", sans-serif;
+  letter-spacing: 0;
+  padding: 0.25em 0 0.325em;
+  display: block;
+  margin: 0 auto;
+  text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
+  /* Clip Background Image */
+  background: url(https://i.ibb.co/RDTnNrT/animated-text-fill.png) repeat-y;
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* Animate Background Image */
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: aitf 80s linear infinite;
+  /* Activate hardware acceleration for smoother animations */
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+}
+
+
+/* Animate Background Image */
+@-webkit-keyframes aitf {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+#filtros-container {
+display: flex;
+}
+
+#filtro-btn {
+	border-radius: 3px;
+	color: #ddd;
+	background: black;
+	font-size: 15px;
+	position: relative;
+	margin-top: 5%;
+	width: 40%;
+	padding-top: 8px;
+	padding-left: 10px;
+	padding-bottom: 8px;
+	text-align: center;
+	font-weight: 600;
+}
+
+#selector {
+	font-size: 15px;
+	position: relative;
+	margin-left: 6%;
+	margin-right: 20px;
+	margin-top: 5%;
+	width: 41%;
+	border: 1px solid #121212;
+	padding-top: 8px;
+	padding-left: 10px;
+	padding-bottom: 8px;
+	border-radius: 3px;
+	color: #495057;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center/8px 10px;
+	background-color: #fff;
+}
+
+ 
+  
+.product-container {
+  margin: 5%;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 40%;
+}
+
+#ProductImg {
+  width: 100%;
+  position: relative;
+}
+
+#ProductName {
+  line-height: 1.2;
+  font-size: 12px;
+  margin-left: 8%;
+  margin-bottom: 5px;
+}
+
+#ProductPrice {
+  color: #393c3e;
+  line-height: 22px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  margin-left: 8%;
+  margin-bottom: 5px;
+}
+
+#ProductCuotas {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ed3237;
+  margin-left: 8%;
+  line-height: 1.5;
+}
+
+#envioGratis {
+  display: inline-block;
+	background-color: #ef4011;
+	border-radius: 3px;
+	padding: 3px 6px; 
+	margin-left: 5%;
+	margin-top: 5px;
+}
+
+
+
+#envioGratis p {
+  letter-spacing: .5px;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
+  margin: 5px;
+  color: #fff;
+  display: block;
+  font-weight: 700;
+}
+
+
+
+
+/* SPINNER */
+#spinner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+  display: none; /* Inicialmente oculto */
+  justify-content: center;
+  align-items: center;
+  z-index: 9000; /* Asegura que el spinner esté por encima de otros elementos */
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #fff;
+  width: 40px;
+  height: 40px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/*VENTANA MODAL DE FILTROS*/
+#filtros-modal {
+   
+  display: none;
+	background: white;
+	position: relative;
+	top: 14%;
+	width: 100%;
+	height: 86%;
+}
+
+ 
+#selector-marca {
+  -webkit-appearance: none; /* Safari y Chrome */
+  -moz-appearance: none; /* Firefox */
+  appearance: none;
+	font-family: 'Poppins', sans-serif;
+	margin: 10%;
+	background: white;
+	border: none;
+	font-size: 23px;
+	font-weight: 600;
+}
+
+#selector-categoria {
+	font-family: 'Poppins', sans-serif;
+	margin: 10%;
+  margin-top: 5%;
+	background: white;
+	border: none;
+	font-size: 23px;
+	font-weight: 600;
+}

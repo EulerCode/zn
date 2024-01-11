@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Formulario de envío</title>
+	<link rel="icon" href="/favicon.png" type="image/x-icon">
+	<link rel="stylesheet" href="/envio/stylesEnvio.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+	<!-- partial:index.partial.html -->
+	<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Formulario de envío</title>
+		<link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+
+	</head>
+
+	<body>
+		<a href="/">
+			<div id="encabezado">
+				<img id="enca" src="compraSegura.jpg">
+				<p><span>Zona Sneakers</span></p>
+			</div>
+		</a>
+
+
+		<div id="overlay">
+			<div id="mensaje">
+				<legend><span><img id="image" src="ubi.png"></span></legend>
+				<label for="cp">Código Postal:</label>
+				<input type="number" id="cp" maxlength="4">
+				<label style="width: 80%;margin-left: 10%;">Si encuentra algún error, puede corregirlo
+					manualmente.</label>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<form action="index.html" method="post">
+					<h1> Formulario de envío </h1>
+
+					<fieldset>
+
+						<legend><span class="number">1</span> Destino</legend>
+
+						<label for="name">País:</label>
+						<input type="text" id="pais">
+
+						<label for="name">Provincia:</label>
+						<input type="text" id="prov">
+
+						<label for="name">Localidad:</label>
+						<input type="text" id="loc">
+
+						<label for="name">Dirección:</label>
+						<input type="text" id="dir">
+
+
+
+					</fieldset>
+					<fieldset>
+
+						<legend><span class="number">2</span> Tus datos</legend>
+						<label for="name">Nombre y apellido:</label>
+						<input type="text" id="nombre">
+						<label for="email">Email:</label>
+						<input type="email" id="mail" name="user_email">
+						<label for="phone">Teléfono</label>
+						<input type="tel" id="phone" pattern="[0-9]{10}" maxlength="10">
+
+
+					</fieldset>
+
+					<fieldset>
+
+						<legend><span class="number">3</span> Información</legend>
+
+						<label for="job">Servicio postal:</label>
+						<select id="correo" name="user_job">
+							<optgroup label="Servicio postal:">
+								<option value="Correo Argentino">Correo Argentino</option>
+								<option value="Andreani">Andreani</option>
+							</optgroup>
+
+						</select>
+
+						<label>Recibe en:</label>
+						<input type="radio" id="domicilioSi" value="domicilioSi" name="user_age"
+							onclick="calcularEnvio()" checked><label for="under_13" class="light">Domicilio</label><br>
+						<input type="radio" id="domicilioNo" value="domicilioNo" name="user_age"
+							onclick="calcularEnvio()"><label id="labelSucur" for="over_13" class="light">Sucursal de
+							correo más cercana</label>
+
+
+					</fieldset>
+					<fieldset>
+						<legend><span class="number">4</span> Despacho</legend>
+						<label>Pedido: <b><a id="precioPedido" style="font-size: 0.9em;"></a></b></label>
+						<b>
+							<a id="pedido">Vacío</a>
+						</b>
+						<label>Costo de envío: <b><a id="CostoEnvio" style="font-size: 0.9em;"></a></b></label>
+						<label>Fecha: <b><a id="fechaEstimada" style="font-size: 0.9em;"></a></b></label>
+					</fieldset>
+
+					<fieldset>
+						<b><label style="display:flex;justify-content: space-between;font-size:1.3em;"><a>Total:
+								</a><b><a id="total" style="color:#49c46d;font-size: 0.9em;"></a></label></b>
+					</fieldset>
+
+				</form>
+			</div>
+		</div>
+		<button id="continuar">Continuar</button>
+
+		<%- include('footer.ejs') %>
+	</body>
+
+	</html>
+	<!-- partial -->
+	<script>
+		var EnvioLimite = "<%= parseFloat(envioLimite)/2 %>";
+		const CostoEnvio = parseFloat("<%= parseFloat(costoEnvio) %>");
+
+
+
+		console.log(EnvioLimite);
+		console.log(CostoEnvio);
+	</script>
+	<script src="./scriptsEnvio.js"></script>
+</body>
+
+</html>

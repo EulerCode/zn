@@ -1,0 +1,118 @@
+#carrousel {
+	margin: -7px;
+	position: relative; 
+	background: black; 
+  height: 7.5vh;
+}
+ 
+ 
+#carrousel .owl-carousel img {
+  
+  height: 50px;
+  max-width: 100%;
+  padding: 6px;
+  width: auto; 
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto; 
+  object-fit: cover;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+ 
+}
+#carrousel .owl-carousel .owl-item {
+  
+  position: relative;
+  transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  transition: all 0.2s;
+  -webkit-transform: all 0.2s;
+  z-index: 1;
+}
+@media (max-width: 768px) {
+  #carrousel .owl-carousel .owl-item {
+    height:150px;
+  }
+}
+@media (max-width: 380px) {
+  #carrousel .owl-carousel .owl-item {
+    height: 150px;
+  }
+}
+ 
+#carrousel .owl-item.big {
+  transform: scale(1.7);
+  -ms-transform: scale(1.7);
+  z-index: 3;
+}
+#carrousel .owl-item.medium {
+  transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  z-index: 2;
+}
+#carrousel .owl-item.medium.mdright {
+  /*border: solid 1px red;*/
+  position: relative;
+  left: -80px;
+}
+@media (min-width: 768px) {
+  #carrousel .owl-item.medium.mdright {
+    left: 0px;
+  }
+}
+#carrousel .owl-item.medium.mdleft {
+  /*border: solid 1px blue;*/
+  position: relative;
+  right: -80px;
+}
+@media (min-width: 768px) {
+  #carrousel .owl-item.medium.mdleft {
+    right: 0px;
+  }
+}
+#carrousel .owl-item.smallRight.active {
+  transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  position: relative;
+  left: -30px;
+}
+#carrousel .owl-item.smallLeft.active {
+  transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  position: relative;
+  right: -30px;
+}
+#carrousel .owl-nav {
+  display: none;
+	position: absolute;
+	top: 30%;
+	width: 104%;
+	left: -2%;
+}
+#carrousel .owl-nav .owl-prev {
+  position: absolute;
+  left: 0px;
+  top: 10px;
+  background: transparent !important;
+  color: #fff !important;
+  font-size: 40px !important;
+}
+#carrousel .owl-nav .owl-prev:hover {
+  color: #adadad !important;
+}
+#carrousel .owl-nav .owl-next {
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  background: transparent !important;
+  color: #fff !important;
+  font-size: 40px !important;
+}
+#carrousel .owl-nav .owl-next:hover {
+  color: #adadad !important;
+}

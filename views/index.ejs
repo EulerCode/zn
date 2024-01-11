@@ -1,0 +1,194 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zona Sneakers</title>
+  <link rel="icon" href="/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Neuton|Oswald'>
+  <script src="https://kit.fontawesome.com/67821f8363.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <link rel="stylesheet" href="/products/styles.css"> <!-- Ruta absoluta -->
+  <link rel="stylesheet" href="/menu/styleMenu.css"> <!-- Ruta absoluta -->
+  <link rel="stylesheet" href="/products/dropD-filtros.css"> <!-- ventana modal select -->
+</head>
+
+<body>
+  <div id="spinner-container">
+    <div class="spinner"></div>
+  </div>
+
+  <div id="IconMenu-y-Cart"> 
+     <button id="btnMenu" onclick="mostrarMenu()"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></button>    
+    <i id="carrito" class="fa-solid fa-cart-shopping" style="color: #ffffff;">
+      <div id="notify">0</div>
+    </i>
+
+  </div>
+  <a href="/">
+    <div id="encabezado">
+      <p>
+        Magia en la pisada
+        <span>
+          Zona Sneakers
+        </span>
+        &mdash; Desde 2006 &mdash;
+      </p>
+    </div>
+  </a>
+
+
+
+  <!--  FILTROS VENTANA MODAL -->
+  <div id="filtros-modal">
+    <span class="close" id="cerrarModal"
+      style="right: 5%; font-size: 32px;  font-weight: 700; opacity: 1; line-height: 1; color: #2d2c2c; position: absolute;">&times;</span>
+
+    <ul>
+
+      <li class="dropdown" id="tipoDropdown">
+        <a href="#" data-toggle="dropdown"><span id="TipoDropdownToggle">Tipo</span> <i class="icon-arrow"></i></a>
+        <ul class="dropdown-menu">
+          <p><a href="#" onclick="updateTipo('Zapatillas')">Zapatillas</a></p>
+          <p><a href="#" onclick="updateTipo('Ojotas')">Ojotas</a></p>
+          <p><a href="#" onclick="updateTipo('Botines')">Botines</a></p>
+          <p><a href="#" onclick="updateTipo('Alpargatas-y-panchas')">Alpargatas y panchas</a></p>
+          <p><a href="#" onclick="updateTipo('Sandalias')">Sandalias</a></p>
+          <p><a href="#" onclick="updateTipo('Zuecos')">Zuecos</a></p>
+          <p><a href="#" onclick="updateTipo('Ojotas')">Ojotas</a></p>
+        </ul>
+
+      </li>
+
+
+
+      <li class="dropdown" id="marcaDropdown">
+        <a href="#" data-toggle="dropdown" style="margin-top: 15px;"><span id="marcaDropdownToggle">Marca</span> <i
+            class="icon-arrow"></i></a>
+        <ul class="dropdown-menu">
+          <p><a href="#" onclick="updateMarca('Nike')">Nike</a></p>
+          <p><a href="#" onclick="updateMarca('adidas')">Adidas</a></p>
+          <p><a href="#" onclick="updateMarca('Puma')">Puma</a></p>
+          <p><a href="#" onclick="updateMarca('Reebok')">Reebok</a></p>
+          <p><a href="#" onclick="updateMarca('Converse')">Converse</a></p>
+          <p><a href="#" onclick="updateMarca('Topper')">Topper</a></p>
+          <p><a href="#" onclick="updateMarca('Fila')">Fila</a></p>
+          <p><a href="#" onclick="updateMarca('Kappa')">Kappa</a></p>
+          <p><a href="#" onclick="updateMarca('Salomon')">Salomon</a></p>
+          <p><a href="#" onclick="updateMarca('le-coq-sportif')">Le Coq Sportif</a></p>
+          <p><a href="#" onclick="updateMarca('Diadora')">Diadora</a></p>
+          <p><a href="#" onclick="updateMarca('Asics')">Asics</a></p>
+          <p><a href="#" onclick="updateMarca('Athix')">Athix</a></p>
+          <p><a href="#" onclick="updateMarca('Havaianas')">Havaianas</a></p>
+          <p><a href="#" onclick="updateMarca('Atomik')">Atomik</a></p>
+          <p><a href="#" onclick="updateMarca('Brooks')">Brooks</a></p>
+          <p><a href="#" onclick="updateMarca('Columbia')">Columbia</a></p>
+          <p><a href="#" onclick="updateMarca('la-gear')">LA Gear</a></p>
+          <p><a href="#" onclick="updateMarca('Crocs')">Crocs</a></p>
+          <p><a href="#" onclick="updateMarca('Dribbling')">Dribbling</a></p>
+          <p><a href="#" onclick="updateMarca('Filament')">Filament</a></p>
+          <p><a href="#" onclick="updateMarca('Lotto')">Lotto</a></p>
+          <p><a href="#" onclick="updateMarca('nexxt-performance')">Nexxt Performance</a></p>
+          <p><a href="#" onclick="updateMarca('361')">361</a></p>
+          <p><a href="#" onclick="updateMarca('Olympikus')">Olympikus</a></p>
+          <p><a href="#" onclick="updateMarca('ON')">ON</a></p>
+          <p><a href="#" onclick="updateMarca('Rider')">Rider</a></p>
+          <p><a href="#" onclick="updateMarca('Saucony')">Saucony</a></p>
+          <p><a href="#" onclick="updateMarca('Skechers')">Skechers</a></p>
+          <p><a href="#" onclick="updateMarca('Superga')">Superga</a></p>
+          <p><a href="#" onclick="updateMarca('Umbro')">Umbro</a></p>
+          <p><a href="#" onclick="updateMarca('under-armour')">Under Armour</a></p>
+          <p><a href="#" onclick="updateMarca('Urbo')">Urbo</a></p>
+          <p><a href="#" onclick="updateMarca('Wilson')">Wilson</a></p>
+        </ul>
+      </li>
+
+      <li class="dropdown" id="catDropdown">
+        <a href="#" data-toggle="dropdown" style="margin-top: 15px;"><span id="CatDropdownToggle">Categoría</span> <i
+            class="icon-arrow"></i></a>
+        <ul class="dropdown-menu">
+          <p><a href="#" onclick="updateCat('Basquet')">Basquet</a></p>
+          <p><a href="#" onclick="updateCat('Futbol')">Futbol</a></p>
+          <p><a href="#" onclick="updateCat('Running')">Running</a></p>
+          <p><a href="#" onclick="updateCat('Skateboard')">Skateboard</a></p>
+          <p><a href="#" onclick="updateCat('Training')">Training</a></p>
+          <p><a href="#" onclick="updateCat('Voley')">Voley</a></p>
+          <p><a href="#" onclick="updateCat('Tennis')">Tennis</a></p>
+          <p><a href="#" onclick="updateCat('Hockey')">Hockey</a></p>
+          <p><a href="#" onclick="updateCat('Moda')">Moda</a></p>
+          <p><a href="#" onclick="updateCat('Motorsport')">Motorsport</a></p>
+          <p><a href="#" onclick="updateCat('Natacion')">Natacion</a></p>
+          <p><a href="#" onclick="updateCat('Padel')">Padel</a></p>
+        </ul>
+
+      </li>
+
+
+
+
+    </ul>
+  </div>
+  <!--   FIN FILTROS VENTANA MODAL -->
+
+  <div id="filtros-container">
+    <select id="selector">
+      <option value="most-relevant">Más Relevantes</option>
+      <option value="most-sold">Más Vendidos</option>
+      <option value="newest-products">Lanzamiento</option>
+      <option value="lowest-price">Precio más Bajo</option>
+      <option value="highest-price">Precio más Alto</option>
+    </select>
+    <div id="filtro-btn"><a>Filtros</a></div>
+  </div>
+
+
+
+  <!-- CARGA DE PRODUTOS EN PANTALLA -->
+  <div class="product-container">
+    <% for (const product of products) { %>
+      <div class="product"
+        onclick="openDetalles('<%= product.name %>','<%= product.price %>', '<%= product.linkProduct %>','<%= JSON.stringify(product.imageLinks) %>')">
+        <div>
+          <img id="ProductImg" src="<%= product.imageLinks[0] %>" alt="<%= product.name %>">
+          <!-- <a><%= product.linkProduct %></a>  -->
+        </div>
+
+        <p id="ProductName">
+          <%= product.name %>
+        </p>
+
+        <% const cleanedPrice=parseFloat(product.price.replace(/[^\d.]/g, '' )) || 0; %>
+          <b><a id="ProductPrice">$<%= (cleanedPrice * 0.65).toFixed(3) %></a></b><br>
+          <a id="ProductCuotas">3 cuotas de $<%= ((cleanedPrice * 0.65)/3).toFixed(3) %></a>
+
+
+          <% if ((cleanedPrice * 0.65).toFixed(3)> parseFloat(envioLimite)/2) { %>
+            <div id="envioGratis">
+              <p>Envío Gratis</p>
+            </div>
+            <% } %>
+
+
+
+      </div>
+
+
+      <% } %>
+
+
+
+  </div>
+
+  <%- include('comentarios.ejs') %>
+  <%- include('footer.ejs') %>
+</body>
+<script src="../globals.js"></script>
+<script src="/products/scriptsIndex.js"></script>
+<script src="/products/dropD-filtros.js"></script>
+<script src="/menu/scriptMenu.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/footer/styleFooter.css">
+    <script src="../globals.js"></script>
+</head>
+
+<body>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="/footer/logoPng.png" alt="Logo">
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/institucional">Institucional</a></li> 
+                    <li><a id="contacto">Contacto</a></li>
+                </ul>
+            </div>
+ 
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> <span id="pagina"></span>. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Obtener el elemento span donde se mostrará el año
+        var yearSpan = document.getElementById('year');
+    
+        // Obtener el año actual
+        var currentYear = new Date().getFullYear();
+    
+        // Actualizar el contenido del span con el año actual
+        yearSpan.textContent = currentYear;
+
+        document.getElementById("contacto").addEventListener("click",()=>{
+         window.location.href = linkWhatsapp;
+        });
+
+        document.getElementById("pagina").textContent = PaginaWeb;
+        
+    </script>
+
+</body>
+
+</html>

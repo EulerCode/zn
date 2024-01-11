@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/comentarios/styleComentarios.css">
+    <!-- Agrega un enlace al archivo JavaScript -->
+    <script src="/comentarios/scriptComentarios.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Encabezado -->
+    <div class="header"></div>
+
+    <div id="granContainer">
+        <div class="input">
+            <img><textarea placeholder="Agrega un comentario..." style="padding: 3px;width: 90%;"></textarea>
+            <a class="button-container">
+                <button id="loginButton">Iniciar sesión para publicar</button>
+                <select id="selectorOrden">
+                    <option value="reciente">Más reciente</option>
+                    <option value="antiguo">Más antiguo</option>
+                </select>
+            </a>
+        </div>
+
+        <div id="comentarios-container"></div>
+        <button id="verMasComentarios">Ver más comentarios</button>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+
+
+                function cargarComentarios() {
+                    $.get('/comentarios', function (comentarios) {
+                        mostrarComentarios(comentarios.slice(0, 5));
+                    });
+                }
+
+                function cargarMasComentarios() {
+                    //document.getElementById("verMasComentarios").style.display = "none";
+                    cargarComentarios(false); // Pasa 'false' para cargar todos los comentarios
+                }
+
+                function mostrarComentarios(comentarios) {
+                    comentarios.forEach((comentario, index) => {
+                        $('#comentarios-container').append(renderComentario(comentario, index + 1));
+                    });
+                }
+
+                function renderComentario(comentario, id) {
+                    const timestamp = comentario.fecha;
+                    const buttons = (comentario.likes != 0) ?
+                        `<p class="action-button">Me gusta</p>
+                        <p>·</p>
+                        <p class="action-button">Responder</p>
+                        <p>·</p>
+                        <p class="action-button"><img id="imgLike" src=/comentarios/like.png> ${comentario.likes}</p>
+                        <p>·</p>` :
+                        `<p class="action-button">Me gusta</p>
+                        <p>·</p>
+                        <p class="action-button">Responder</p>`;
+
+                    return `<div class="single-comment" id="comment-${id}">
+                        <a href="${comentario.urlPerfil}" target="_blank"><img src="${comentario.urlImagen}"></a>
+                        <div class="single-container">
+                            <a href="${comentario.urlPerfil}" target="_blank"><span>${comentario.nombre}</span></a>
+                            <span style="color: black; font-weight: 300;">${comentario.comentarios || comentario.comentario}</span>
+                        </div>
+                        <a href="https://www.facebook.com/login.php" target="_blank" style="text-decoration: none;">
+                            <div class="buttons">
+                                ${buttons}
+                                <p class="action-button timestamp">${timestamp}</p>
+                            </div>
+                        </a>
+                    </div>`;
+                }
+
+                cargarComentarios();
+                document.getElementById("verMasComentarios").addEventListener("click", () => {
+                    document.getElementById("verMasComentarios").style.display = "none";
+                    cargarMasComentarios();
+                });
+
+                document.getElementById("loginButton").addEventListener("click", function () {
+                    window.location.href = "https://www.facebook.com/login.php";
+                });
+            });
+        </script>
+
+    </div>
+
+</body>
+
+</html>

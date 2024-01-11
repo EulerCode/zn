@@ -1,0 +1,42 @@
+<!-- errorTemplate.html -->
+<html>
+  <head>
+    <title>Error</title>
+    <style>
+      body {
+        font-family: roboto, sans-serif;
+      }
+      .error-container {
+        text-align: center;
+        padding: 50px;
+        background-color: #2b2b2b;;
+        color: #721c24;
+      }
+      h1 {
+        color: #d0d0d0;
+      }
+      .return-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 20px;
+        display: inline-block;
+        cursor: pointer; 
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-container">
+      <h1>{{errorMessage}}</h1>
+      <a href="#" class="return-button" onclick="goBack()">Volver</a>
+    </div>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </body>
+</html>

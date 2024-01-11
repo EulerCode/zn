@@ -1,0 +1,241 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+    <title>Zona Sneakers</title>
+
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton|Oswald">
+    <link href="https://fonts.googleapis.com/css?family=Playball&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/67821f8363.js" crossorigin="anonymous"></script>
+
+    <!-- Prefixfree -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+    <!-- Additional Stylesheets -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css'>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/home/styleSlider.css">
+    <link rel="stylesheet" href="/home/marcas/styleMarcas.css">
+    <link rel="stylesheet" href="/home/stylesHome.css">
+    <link rel="stylesheet" href="/menu/styleMenu.css"> 
+</head>
+
+<body>
+    <div id="spinner-container">
+        <div class="spinner"></div>
+    </div>
+
+    <div id="IconMenu-y-Cart"> 
+        <button id="btnMenu" onclick="mostrarMenu()"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></button>    
+       <i id="carrito" class="fa-solid fa-cart-shopping" style="color: #ffffff;">
+         <div id="notify">0</div>
+       </i>   
+     </div>
+
+    <div id="encabezado">
+        <p>
+            Magia en la pisada
+            <span>
+                Zona Sneakers
+            </span>
+            &mdash; Desde 2006 &mdash;
+        </p>
+    </div>
+
+    <!--   ===========================SLIDER DE IMAGENES=========================== -->
+    <!-- partial:index.partial.html -->
+    <section class="banner__slider">
+        <div class="slider stick-dots">
+            <div class="slide">
+                <div class="slide__img">
+                    <img src="" alt="" data-lazy="/home/marketPlace.jpg" class="full-image animated"
+                        data-animation-in="zoomInImage" />
+                </div>
+                <div class="slide__content " style="width: 100%;">
+                    <div class="slide__content--headings text-center"
+                        style="margin-top: 100px;width: 100%;padding: 17px;">
+
+                        <p class="animated top-title" data-animation-in="fadeInUp" data-delay-in="0.3">Sumáte a nuestra
+                            red de vendedores</p>
+                        <h2 class="animated title" data-animation-in="fadeInUp">Facebook MarketPlace</h2>
+                        <button class="btn-light btn button-custom animated" data-animation-in="fadeInUp" style="text-decoration: none;
+                            color: #fff;
+                            font-size: 16px;
+                            border-color: #868686;
+                            font-weight: 600;
+                            background: #ffffff30;
+                            border-radius: 10px;">Unirme</button>
+                        <p class="animated top-title" data-animation-in="fadeInUp" data-delay-in="0.3">Ganá
+                            importantes comisiones</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="slide__img">
+                    <img src="" alt="" data-lazy="/home/promociones.jpg" class="full-image animated"
+                        data-animation-in="zoomInImage" />
+                </div>
+                <div class="slide__content slide__content__left">
+                    <div class="slide__content--headings text-left" style="margin-top: -100px;">
+                        <p class="animated top-title" data-animation-in="fadeInRight" data-delay-in="0.2">3 cuotas sin
+                            interés con tarjeta</p>
+                        <h2 class="animated title" data-animation-in="fadeInRight">20% OFF en efectivo</h2>
+                        <a href="/api/products"><button class="btn-light btn button-custom animated" data-animation-in="fadeInUp">Ver
+                            productos</button></a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="slide">
+                <div class="slide__img">
+                    <img src="" alt="" data-lazy="/home/urban.jpg" class="full-image animated"
+                        data-animation-in="zoomOutImage" />
+                </div>
+                <div class="slide__content slide__content__right">
+                    <div class="slide__content--headings text-right" style="margin-top: 100px;">
+                        <p class="animated top-title" data-animation-in="fadeInLeft" data-delay-in="0.2">Gran variedad
+                            de calzado informal</p>
+                        <h2 class="animated title" data-animation-in="fadeInLeft" style="color: #fff;">Conocé ZONE URBAN
+                        </h2>
+                        <a href="/urban"><button class="btn-light btn button-custom animated"
+                            data-animation-in="fadeInUp">Visitar</button></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44px" height="44px" id="circle"
+                fill="none" stroke="currentColor">
+                <circle r="20" cy="22" cx="22" id="test">
+            </symbol>
+        </svg>
+    </section>
+    <!--   ===========================SLIDER DE MARCAS=========================== -->
+    <div id="carrousel">
+        <div class="container">
+            <div class="col-md-12" style="position: relative;top: -5rem;">
+                <div class="owl-carousel owl-theme">
+                    <a href="/api/products?baseUrl=https://www.dexter.com.ar/marcas/adidas/zapatillas">
+                        <img src="/home/marcas/adidas.png" alt="Adidas">
+                    </a>
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/puma">
+                        <img src="/home/marcas/puma.png" alt="puma">
+                    </a> 
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/nike">   
+                        <img src="/home/marcas/nike.png" alt="nike">
+                    </a> 
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/le-coq-sportif">  
+                        <img src="/home/marcas/lecoq.png" alt="lecoq">
+                    </a> 
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/asics">  
+                        <img src="/home/marcas/asic.png" alt="asic">
+                    </a> 
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/reebok">  
+                        <img src="/home/marcas/reebok.png" alt="reebok">
+                    </a> 
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/converse">  
+                        <img src="/home/marcas/converse.png" alt="converse">
+                    </a> 
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/topper">  
+                        <img src="/home/marcas/topper.png" alt="topper">
+                    </a>  
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/lotto">  
+                        <img src="/home/marcas/lotto.png" alt="lotto">
+                    </a>  
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/under-armour">  
+                        <img src="/home/marcas/under.png" alt="under">
+                    </a>  
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- CARGA DE PRODUTOS EN PANTALLA -->
+    <div class="product-container">
+        <h1 style="font-size: 2rem;color: #000000a1; margin-bottom: -2%;">Más vendidos de la semana</h1>
+        <% for (const product of products) { %>
+            <div class="product"
+                onclick="openDetalles('<%= product.name %>','<%= product.price %>', '<%= product.linkProduct %>','<%= JSON.stringify(product.imageLinks) %>')">
+                <div>
+                    <img id="ProductImg" src="<%= product.imageLinks[0] %>" alt="<%= product.name %>">
+                    <!-- <a><%= product.linkProduct %></a>  -->
+                </div>
+
+                <p id="ProductName">
+                    <%= product.name %>
+                </p>
+
+                <% const cleanedPrice=parseFloat(product.price.replace(/[^\d.]/g, '' )) || 0; %>
+                    <b><a id="ProductPrice">$<%= (cleanedPrice * 0.65).toFixed(3) %></a></b><br>
+                    <a id="ProductCuotas">3 cuotas de $<%= ((cleanedPrice * 0.65)/3).toFixed(3) %></a>
+
+
+                    <% if ((cleanedPrice * 0.65).toFixed(3)> parseFloat(envioLimite)/2) { %>
+                        <div id="envioGratis">
+                            <p>Envío Gratis</p>
+                        </div>
+                        <% } %>
+            </div>
+            <% } %> 
+               <!-- VER MAS PRODUTOS -->
+                <h1 id="verMas"
+                    style="font-size: 2rem;color: #000000a1; margin-bottom: -2%;text-decoration: underline;">Ver más
+                    productos</h1>
+                <script>
+                    document.getElementById("verMas").addEventListener("click", () => {
+                        window.location.href = "/api/products";
+                    });
+                </script>
+
+
+    </div>
+
+    <%- include('comentarios.ejs') %>
+
+    <%- include('footer.ejs') %>
+
+
+
+</body>
+<script src="../globals.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script>
+<script src='https://alexandrebuffet.fr/codepen/slider/slick-animation.min.js'></script>
+<script src="/home/scriptSlider.js"></script>
+<script src="/home/scriptsHome.js"></script>
+
+
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
+<script src="/home/marcas/scriptMarcas.js"></script>
+<script src="/menu/scriptMenu.js"></script>
+
+
+
+</html>
