@@ -28,7 +28,7 @@
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 	<script src="https://kit.fontawesome.com/67821f8363.js" crossorigin="anonymous"></script>
-	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css'> 
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="../globals.js"></script>
 	<script src="./senders.js"></script>
@@ -178,7 +178,11 @@
 				<p
 					style="font-family: 'Poppins', sans-serif;margin-left:  1.5em; text-indent: -1.4em; word-spacing:1px; text-align: left;font-size:1.3rem; color: #fff;font-weight: 700;">
 					2- Abra su aplicación de pagos preferida y realice una trasferencia de <span
-						style="color:#20ff20;;">$<span id="imp"></span></span></p>
+						style="text-decoration: line-through;color:#ff00009d;">$<span id="imp"></span></span><span style="font-size: 8px;">
+						(-20%)</span>
+					<span id="impDesc"  style="color:#20ff20"></span>
+				</p>
+				</p>
 				<p
 					style="font-family: 'Poppins', sans-serif;margin-left:  1.5em; text-indent: -1.4em; word-spacing:1px; text-align: left;font-size:1.3rem; color: #fff;font-weight: 700;">
 					3- Controle que el destinatario sea correcto. Titular del cuenta: Lic. <span id="nombre"></span>.
@@ -206,7 +210,10 @@
 					<p
 						style="font-family: 'Poppins', sans-serif;margin-left:  1.5em; text-indent: -1.4em; word-spacing:1px; text-align: left;font-size:1.3rem; color: #fff;font-weight: 700;">
 						1- Acercáte a una agencia de pagos y mencioná que deseas realizar una recarga de <span
-							style="color:#20ff20;">$<span id="imp2"></span>.</p>
+						style="text-decoration: line-through;color:#ff00009d;">$<span id="imp2"></span></span><span style="font-size: 8px;"> (-20%)</span>
+						<span id="impDesc2"  style="color:#20ff20"></span>.
+					</p>
+
 					<p
 						style="font-family: 'Poppins', sans-serif;margin-left:  1.5em; text-indent: -1.4em; word-spacing:1px; text-align: left;font-size:1.3rem; color: #fff;font-weight: 700;">
 						2- Dictále el siguiente número de cuenta a la persona que te atienda.</p>
@@ -306,7 +313,7 @@
 		<div id="MPdrop" align="center"><br><a style="  color:rgb(212, 212, 212);">Las comisiones las aplica Mercado
 				Pago</a>
 
-			<br><a><b>Importe:</b> <label style="color:#20ff20;; font-size:1.3rem;" id="importeMP"></label>
+			<br><a><b>Importe:</b> <label style="color:#20ff20; font-size:1.3rem;" id="importeMP"></label>
 				<a style="font-style:italic ; font-size:1.1rem;">+6% IVA incluído</a>
 				<br><button id="pagarMP"
 					style="background:none; border:1px solid #2a8cfe; border-radius:5px;color:#2a8cfe;font-size:1.4rem"><b>Pagar
@@ -375,6 +382,9 @@
 		});
 
 
+		document.getElementById("impDesc").innerHTML ="$" + (parseFloat(urlParams.get('CostoTotal')) - parseFloat(urlParams.get('CostoTotal')) * 0.2).toFixed(3);
+		document.getElementById("impDesc2").innerHTML ="$" + (parseFloat(urlParams.get('CostoTotal')) - parseFloat(urlParams.get('CostoTotal')) * 0.2).toFixed(3);
+
 		document.getElementById('CBU2').value = cbu;
 		document.getElementById('nCuenta').value = Ncuenta;
 		document.getElementById('numCuenta').value = Ncuenta;
@@ -384,7 +394,7 @@
 
 
 
- 
+
 </body>
 
 </html>
