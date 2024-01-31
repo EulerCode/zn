@@ -95,6 +95,16 @@ body {
 	width: 100%;
 }
 
+ 
+#verMas{
+	font-size: 2rem;
+	color: white;
+	margin-bottom: -2%; 
+	background: #ef4011;
+	padding: 10px;
+	border-radius: 10px;
+}
+
 .product {
   border: 1px solid #ddd;
   padding: 10px;

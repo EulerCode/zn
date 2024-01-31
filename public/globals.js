@@ -1,7 +1,7 @@
 var marca="Zona Sneakers";
 var marca1="Zona";
 var tipo="zapateria";
-var PaginaWeb = "zona-sneakers.com.ar";
+var PaginaWeb = "zona-sneakers.vercel.app";
 var Email = "zona.sneakers@gmail.com";
 var Direccion = "1245, Av. San Martín 1233, M5500 Mendoza"; // 
 var ImporteMP=0.15;
