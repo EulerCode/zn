@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.png" type="image/x-icon">
-  <title>Zona Sneakers</title>
+  <title id="titular">titulo</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Neuton|Oswald'>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
@@ -21,7 +21,7 @@
 <body>
   <a href="/">
     <div id="encabezado">
-      <p><span>Zona Sneakers</span></p>
+      <p><span id="encaMarca">Zona Sneakers</span></p>
     </div>
   </a>
 
@@ -141,193 +141,200 @@
 
   <%- include('comentarios.ejs') %>
 
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const name = urlParams.get('name');
-    const precio = urlParams.get('precio');
-    var nItem = urlParams.get('DetallesLink');
-    var limiteEnv = "<%= parseFloat(envioLimite)/2 %>";
-    const costo = "<%= costoEnvio %>";
-    var gratis = true;
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const name = urlParams.get('name');
+      const precio = urlParams.get('precio');
+      var nItem = urlParams.get('DetallesLink');
+      var limiteEnv = "<%= parseFloat(envioLimite)/2 %>";
+      const costo = "<%= costoEnvio %>";
+      var gratis = true;
 
-    // Extrae la parte específica después del último "/" y antes del ".html"
-    const startIndex = nItem.lastIndexOf('/') + 1;
-    const endIndex = nItem.lastIndexOf('.html');
-    nItem = nItem.substring(startIndex, endIndex);
-    document.getElementById('numeroItem').textContent = nItem;
-    document.getElementById('ProductName').textContent = name;
-    const precioEntero = parseFloat(precio.replace(/[^\d.]/g, '')) || 0;
-    document.getElementById('precio').textContent = "$" + (precioEntero * 0.65).toFixed(3);
+      // Extrae la parte específica después del último "/" y antes del ".html"
+      const startIndex = nItem.lastIndexOf('/') + 1;
+      const endIndex = nItem.lastIndexOf('.html');
+      nItem = nItem.substring(startIndex, endIndex);
+      document.getElementById('numeroItem').textContent = nItem;
+      document.getElementById('ProductName').textContent = name;
+      const precioEntero = parseFloat(precio.replace(/[^\d.]/g, '')) || 0;
+      document.getElementById('precio').textContent = "$" + (precioEntero * 0.65).toFixed(3);
 
-    if (parseFloat((precioEntero * 0.65).toFixed(3)) >= limiteEnv) {
-      document.getElementById('envioGratis').style.display = "inline-block";
-
-
-    } else {
-      document.getElementById('envioGratis').style.display = "none";
-      gratis = false;
-    }
-
-    document.getElementById('nCuotas').textContent = "$" + ((precioEntero * 0.65) / 3).toFixed(3);//3 cuotas sin interes.
-    document.getElementById('nEfectivo').textContent = "$" + ((precioEntero * 0.65) * 0.8).toFixed(3); //al precio que ya tenia un 35% menos, se le quita un 20%
+      if (parseFloat((precioEntero * 0.65).toFixed(3)) >= limiteEnv) {
+        document.getElementById('envioGratis').style.display = "inline-block";
 
 
+      } else {
+        document.getElementById('envioGratis').style.display = "none";
+        gratis = false;
+      }
 
-    const descripcionElement = document.querySelector('.descripcion-container');
-    descripcionElement.innerHTML = descripcionElement.innerHTML
-      .split('\n') // Dividir el texto por saltos de línea
-      .map(line => line.trim()) // Eliminar espacios adicionales al inicio y al final de cada línea
-      .filter(line => line.length > 0) // Eliminar líneas vacías
-      .map(line => line.replace(/:([\s\u00A0]*)/g, ': ')) // Reemplazar salto de línea después de dos puntos con espacio
-      .join('<br>'); // Volver a unir las líneas con saltos de línea HTML
-
-    descripcionElement.innerHTML = descripcionElement.innerHTML.replace(/:\s*(\n|<br>)/g, ':  ');
+      document.getElementById('nCuotas').textContent = "$" + ((precioEntero * 0.65) / 3).toFixed(3);//3 cuotas sin interes.
+      document.getElementById('nEfectivo').textContent = "$" + ((precioEntero * 0.65) * 0.8).toFixed(3); //al precio que ya tenia un 35% menos, se le quita un 20%
 
 
+
+      const descripcionElement = document.querySelector('.descripcion-container');
+      descripcionElement.innerHTML = descripcionElement.innerHTML
+        .split('\n') // Dividir el texto por saltos de línea
+        .map(line => line.trim()) // Eliminar espacios adicionales al inicio y al final de cada línea
+        .filter(line => line.length > 0) // Eliminar líneas vacías
+        .map(line => line.replace(/:([\s\u00A0]*)/g, ': ')) // Reemplazar salto de línea después de dos puntos con espacio
+        .join('<br>'); // Volver a unir las líneas con saltos de línea HTML
+
+      descripcionElement.innerHTML = descripcionElement.innerHTML.replace(/:\s*(\n|<br>)/g, ':  ');
 
 
 
 
 
-  </script>
+
+
+    </script>
 
 
 
 
-  <!-- Modal de MEDIOS DE PAGO -->
-  <div id="overlay"></div>
-  <div id="modal" class="modal">
-    <span class="close"
-      style="right: 10px; font-size: 32px;  font-weight: 700; opacity: 1; line-height: 1; color: #fff; position: relative; top: -44px; ">&times;</span>
-    <div class="col-md-6 col-sm-6">
-      <div class="panel-group wrap" id="accordion" role="tablist" aria-multiselectable="true">
-        <!-- Panel 1 -->
-        <div class="panel">
-          <div class="panel-heading" role="tab" id="headingOne">
-            <h4 class="panel-title">
-              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
-                aria-controls="collapseOne">
-                Transferencia bancaria
-              </a>
-            </h4>
-          </div>
-          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-            <div class="panel-body">
-              <li>Realizás una transferencia por el monto indicado a nuestro Cbu. A este tipo de pago se le aplica un
-                <b>descuento del 20%</b>
-              </li>
-              <li>Cuando tu transferencia impacta en nuestras cuentas verificamos los datos con los que proporcionaste
-                en el formulario de envío.</li>
-              <li>El pedido se arma y despacha automaticamente para cumplir con los plazos de entrega.</li>
+    <!-- Modal de MEDIOS DE PAGO -->
+    <div id="overlay"></div>
+    <div id="modal" class="modal">
+      <span class="close"
+        style="right: 10px; font-size: 32px;  font-weight: 700; opacity: 1; line-height: 1; color: #fff; position: relative; top: -44px; ">&times;</span>
+      <div class="col-md-6 col-sm-6">
+        <div class="panel-group wrap" id="accordion" role="tablist" aria-multiselectable="true">
+          <!-- Panel 1 -->
+          <div class="panel">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  Transferencia bancaria
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                <li>Realizás una transferencia por el monto indicado a nuestro Cbu. A este tipo de pago se le aplica un
+                  <b>descuento del 20%</b>
+                </li>
+                <li>Cuando tu transferencia impacta en nuestras cuentas verificamos los datos con los que proporcionaste
+                  en el formulario de envío.</li>
+                <li>El pedido se arma y despacha automaticamente para cumplir con los plazos de entrega.</li>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Panel 2 -->
-        <div class="panel">
-          <div class="panel-heading" role="tab" id="headingTwo">
-            <h4 class="panel-title">
-              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
-                aria-expanded="false" aria-controls="collapseTwo">
-                Tarjeta de dédito
-              </a>
-            </h4>
-          </div>
-          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-            <div class="panel-body">
-              <li>Recibimos tu pago con tarjeta de débito. A este tipo de pago <b>no se le aplican interéses ni
-                  descuentos.</b></li>
-              <li>El pedido se arma y despacha automaticamente para cumplir con los plazos de entrega.</li>
+          <!-- Panel 2 -->
+          <div class="panel">
+            <div class="panel-heading" role="tab" id="headingTwo">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  Tarjeta de dédito
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="panel-body">
+                <li>Recibimos tu pago con tarjeta de débito. A este tipo de pago <b>no se le aplican interéses ni
+                    descuentos.</b></li>
+                <li>El pedido se arma y despacha automaticamente para cumplir con los plazos de entrega.</li>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Panel 3 -->
-        <div class="panel">
-          <div class="panel-heading" role="tab" id="headingThree">
-            <h4 class="panel-title">
-              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
-                aria-expanded="false" aria-controls="collapseThree">
-                Tarjeta de crédito
-              </a>
-            </h4>
-          </div>
-          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-            <div class="panel-body">
-              <li>Hasta 3 cuotas con tu tarjeta de crédito. A este tipo de pago <b>no se le aplican interéses ni
-                  descuentos.</b></li>
-              <li>El pedido se arma y despacha automaticamente para cumplir con los plazos de entrega.</li>
+          <!-- Panel 3 -->
+          <div class="panel">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+                  aria-expanded="false" aria-controls="collapseThree">
+                  Tarjeta de crédito
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+                <li>Hasta 3 cuotas con tu tarjeta de crédito. A este tipo de pago <b>no se le aplican interéses ni
+                    descuentos.</b></li>
+                <li>El pedido se arma y despacha automaticamente para cumplir con los plazos de entrega.</li>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Panel 4 -->
-        <div class="panel">
-          <div class="panel-heading" role="tab" id="headingFour">
-            <h4 class="panel-title">
-              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour"
-                aria-expanded="false" aria-controls="collapseFour">
-                Pago Mixto
-              </a>
-            </h4>
-          </div>
-          <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-            <div class="panel-body">
-              <li>Podés pagar una parte en efectivo mediante transferencia y lo que resta en hasta 3 cuotas con tarjeta
-                de crédito. <b>Al monto que hayas pagado por transferencia se le aplica un descuento del 20%</b> por lo
-                que es una excelente opción. El despacho se realiza luego de recibida la
-                transferencia y notificado el pago de la primer cuota con tarjeta.
-              </li>
+          <!-- Panel 4 -->
+          <div class="panel">
+            <div class="panel-heading" role="tab" id="headingFour">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour"
+                  aria-expanded="false" aria-controls="collapseFour">
+                  Pago Mixto
+                </a>
+              </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+              <div class="panel-body">
+                <li>Podés pagar una parte en efectivo mediante transferencia y lo que resta en hasta 3 cuotas con
+                  tarjeta
+                  de crédito. <b>Al monto que hayas pagado por transferencia se le aplica un descuento del 20%</b> por
+                  lo
+                  que es una excelente opción. El despacho se realiza luego de recibida la
+                  transferencia y notificado el pago de la primer cuota con tarjeta.
+                </li>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- VENTANA MODAL GUIA DE TALLES -->
+    <div id="modalTalles" class="modal">
+      <span class="close"
+        style="font-size: 32px;font-weight: 700;position: relative;top: -44px;float: right;margin-top: 2%; opacity: .7;">&times;</span>
+      <div id="cargador" style="margin-top: 5%; font-size: 20px; text-align: center;">
+        <p>Buscando medidas para
+        <p id="nameMedida" style="font-weight: 600;"></p>
+        </p>
+        <div id="barritaMedida"></div>
+        <img id="imgMedida" style="width: 50%;">
+        <div>
+          <p>Confiá en nosotros...</p>
+          <p>No fallamos <i class="fa-regular fa-face-smile-wink" style="color: #1e3050;"></i></p>
+        </div>
+      </div>
+      <div id="ContimgMedida">
+        <img id="imgPie" src="/detalles/medida_pie.jpg"
+          style="display:none; width: 50%; margin-bottom: 5%;position: relative;top: -5%;">
+      </div>
+
+
+      <p id="instruc" style="display: none; position: relative; top: -1%;">Ponéte de pie sobre una superficie plana, con
+        tu altura alineada con la
+        pared. Medí la parte más larga del pie (desde el talón hasta los dedos) con una regla.</p>
+      <b>
+        <p id="titleTabla" style="display: none;text-align: center;">Tabla Standar para <a id="nameMedida2"
+            style="color: black;"></a></p>
+      </b>
+      <div id="tabla" style="display: none;">
+        <img src="/detalles/TallesImg.jpg" style="width: 100%;">
       </div>
     </div>
 
 
-  </div>
-
-  <!-- VENTANA MODAL GUIA DE TALLES -->
-  <div id="modalTalles" class="modal">
-    <span class="close"
-      style="font-size: 32px;font-weight: 700;position: relative;top: -44px;float: right;margin-top: 2%; opacity: .7;">&times;</span>
-    <div id="cargador" style="margin-top: 5%; font-size: 20px; text-align: center;">
-      <p>Buscando medidas para
-      <p id="nameMedida" style="font-weight: 600;"></p>
-      </p>
-      <div id="barritaMedida"></div>
-      <img id="imgMedida" style="width: 50%;">
-      <div>
-        <p>Confiá en nosotros...</p>
-        <p>No fallamos <i class="fa-regular fa-face-smile-wink" style="color: #1e3050;"></i></p>
-      </div>
-    </div>
-    <div id="ContimgMedida">
-      <img id="imgPie" src="/detalles/medida_pie.jpg"
-        style="display:none; width: 50%; margin-bottom: 5%;position: relative;top: -5%;">
-    </div>
-
-
-    <p id="instruc" style="display: none; position: relative; top: -1%;">Ponéte de pie sobre una superficie plana, con
-      tu altura alineada con la
-      pared. Medí la parte más larga del pie (desde el talón hasta los dedos) con una regla.</p>
-    <b>
-      <p id="titleTabla" style="display: none;text-align: center;">Tabla Standar para <a id="nameMedida2"
-          style="color: black;"></a></p>
-    </b>
-    <div id="tabla" style="display: none;">
-      <img src="/detalles/TallesImg.jpg" style="width: 100%;">
-    </div>
-  </div>
-
-
-  <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/glide.min.js"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
-  <script src="/detalles/scriptsDetalles.js"></script>
-  <script src="/cart/cartJS.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/glide.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+    <script src="/detalles/scriptsDetalles.js"></script>
+    <script src="/cart/cartJS.js"></script>
+    <script src="../../../globals.js"></script>
+    <script>
+      document.getElementById("titular").textContent = marca;
+      document.getElementById("encaMarca").textContent = marca;
+    </script>
 </body>
 
 

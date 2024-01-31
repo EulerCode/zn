@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.png" type="image/x-icon">
-    <title>Zona Sneakers</title>
+    <title id="titular">titulo</title>
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="/home/styleSlider.css">
     <link rel="stylesheet" href="/home/marcas/styleMarcas.css">
     <link rel="stylesheet" href="/home/stylesHome.css">
-    <link rel="stylesheet" href="/menu/styleMenu.css"> 
+    <link rel="stylesheet" href="/menu/styleMenu.css">
 </head>
 
 <body>
@@ -43,22 +43,21 @@
         <div class="spinner"></div>
     </div>
 
-    <div id="IconMenu-y-Cart"> 
-        <button id="btnMenu" onclick="mostrarMenu()"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></button>    
-       <i id="carrito" class="fa-solid fa-cart-shopping" style="color: #ffffff;">
-         <div id="notify">0</div>
-       </i>   
-     </div>
+    <div id="IconMenu-y-Cart">
+        <button id="btnMenu" onclick="mostrarMenu()"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></button>
+        <i id="carrito" class="fa-solid fa-cart-shopping" style="color: #ffffff;">
+            <div id="notify">0</div>
+        </i>
+    </div>
 
     <div id="encabezado">
         <p>
             Magia en la pisada
-            <span>
-                Zona Sneakers
-            </span>
+            <span id="encaMarca"></span>
             &mdash; Desde 2006 &mdash;
         </p>
     </div>
+
 
     <!--   ===========================SLIDER DE IMAGENES=========================== -->
     <!-- partial:index.partial.html -->
@@ -99,8 +98,9 @@
                         <p class="animated top-title" data-animation-in="fadeInRight" data-delay-in="0.2">3 cuotas sin
                             interés con tarjeta</p>
                         <h2 class="animated title" data-animation-in="fadeInRight">20% OFF en efectivo</h2>
-                        <a href="/api/products"><button class="btn-light btn button-custom animated" data-animation-in="fadeInUp">Ver
-                            productos</button></a>
+                        <a href="/api/products"><button class="btn-light btn button-custom animated"
+                                data-animation-in="fadeInUp">Ver
+                                productos</button></a>
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                         <h2 class="animated title" data-animation-in="fadeInLeft" style="color: #fff;">Conocé ZONE URBAN
                         </h2>
                         <a href="/urban"><button class="btn-light btn button-custom animated"
-                            data-animation-in="fadeInUp">Visitar</button></a>
+                                data-animation-in="fadeInUp">Visitar</button></a>
                     </div>
                 </div>
             </div>
@@ -141,32 +141,32 @@
                     </a>
                     <a href="/api/products?baseUrl=<%= process.env.web %>/puma">
                         <img src="/home/marcas/puma.png" alt="puma">
-                    </a> 
-                    <a href="/api/products?baseUrl=<%= process.env.web %>/nike">   
+                    </a>
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/nike">
                         <img src="/home/marcas/nike.png" alt="nike">
-                    </a> 
-                    <a href="/api/products?baseUrl=<%= process.env.web %>/le-coq-sportif">  
+                    </a>
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/le-coq-sportif">
                         <img src="/home/marcas/lecoq.png" alt="lecoq">
-                    </a> 
-                    <a href="/api/products?baseUrl=<%= process.env.web %>/asics">  
+                    </a>
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/asics">
                         <img src="/home/marcas/asic.png" alt="asic">
-                    </a> 
-                    <a href="/api/products?baseUrl=<%= process.env.web %>/reebok">  
+                    </a>
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/reebok">
                         <img src="/home/marcas/reebok.png" alt="reebok">
-                    </a> 
-                    <a href="/api/products?baseUrl=<%= process.env.web %>/converse">  
+                    </a>
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/converse">
                         <img src="/home/marcas/converse.png" alt="converse">
-                    </a> 
-                    <a href="/api/products?baseUrl=<%= process.env.web %>/topper">  
+                    </a>
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/topper">
                         <img src="/home/marcas/topper.png" alt="topper">
-                    </a>  
-                    <a href="/api/products?baseUrl=<%= process.env.web %>/lotto">  
+                    </a>
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/lotto">
                         <img src="/home/marcas/lotto.png" alt="lotto">
-                    </a>  
-                    <a href="/api/products?baseUrl=<%= process.env.web %>/under-armour">  
+                    </a>
+                    <a href="/api/products?baseUrl=<%= process.env.web %>/under-armour">
                         <img src="/home/marcas/under.png" alt="under">
-                    </a>  
-                  
+                    </a>
+
                 </div>
             </div>
         </div>
@@ -174,8 +174,18 @@
 
 
 
+
     <!-- CARGA DE PRODUTOS EN PANTALLA -->
     <div class="product-container">
+        <!-- VER TODOS LOS PRODUTOS -->
+        <h1 id="verMas">Ver todos los productos</h1>
+        <script>
+            document.getElementById("verMas").addEventListener("click", () => {
+                window.location.href = "/api/products";
+            });
+        </script>
+
+
         <h1 style="font-size: 2rem;color: #000000a1; margin-bottom: -2%;">Más vendidos de la semana</h1>
         <% for (const product of products) { %>
             <div class="product"
@@ -200,23 +210,15 @@
                         </div>
                         <% } %>
             </div>
-            <% } %> 
-               <!-- VER MAS PRODUTOS -->
-                <h1 id="verMas"
-                    style="font-size: 2rem;color: #000000a1; margin-bottom: -2%;text-decoration: underline;">Ver más
-                    productos</h1>
-                <script>
-                    document.getElementById("verMas").addEventListener("click", () => {
-                        window.location.href = "/api/products";
-                    });
-                </script>
+            <% } %>
+
 
 
     </div>
 
     <%- include('comentarios.ejs') %>
 
-    <%- include('footer.ejs') %>
+        <%- include('footer.ejs') %>
 
 
 
@@ -228,7 +230,10 @@
 <script src="/home/scriptSlider.js"></script>
 <script src="/home/scriptsHome.js"></script>
 
-
+<script>
+    document.getElementById("titular").textContent = marca;
+    document.getElementById("encaMarca").textContent = marca;
+</script>
 
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>

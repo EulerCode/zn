@@ -4,7 +4,7 @@
 <head>
     <link rel="icon" href="/favicon.png" type="image/x-icon">
     <script src="../globals.js"></script>
-   
+
     <meta charset="UTF-8">
 
 
@@ -18,7 +18,7 @@
 <body>
     <a href="/">
         <div id="encabezado">
-            <p><span>Zona Sneakers</span></p>
+            <p><span id="encaMarca"></span></p>
         </div>
     </a>
 
@@ -41,6 +41,10 @@
             event.preventDefault();
             window.location.href = linkWhatsapp;
         });
+    </script>
+
+    <script>
+        document.getElementById("encaMarca").textContent = marca;
     </script>
 
 </body>

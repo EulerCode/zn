@@ -25,7 +25,7 @@
 		<a href="/">
 			<div id="encabezado">
 				<img id="enca" src="compraSegura.jpg">
-				<p><span>Zona Sneakers</span></p>
+				<p><span id="encaMarca"></span></p>
 			</div>
 		</a>
 
@@ -135,6 +135,11 @@
 		console.log(CostoEnvio);
 	</script>
 	<script src="./scriptsEnvio.js"></script>
+
+	<script src="../globals.js"></script>
+	<script> 
+		document.getElementById("encaMarca").textContent = marca;
+	</script>
 </body>
 
 </html>
