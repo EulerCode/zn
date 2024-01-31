@@ -184,17 +184,15 @@ app.get('/tar', (req, res) => {
   const total = req.query.total;
   const cuotas = req.query.cuotas;
   const importeCuota = req.query.importeCuota;
-  const tipo = req.query.tipo; // Puedes acceder a los parámetros de la URL así
-
-  // Creamos la URL del iframe con los parámetros recibidos
-  //const iframeURL = `http://ejemplo.com/?parametro1=`;
+  const tipo = req.query.tipo;  
+ 
   const iframeURL = `https://gk3sr7pm2td6af8xh1jl4wo9vu5zc0yb.000webhostapp.com/index.html?total=${total}&cuotas=${cuotas}&importeCuota=${importeCuota}&tipo=${tipo}`;
-  // Creamos el contenido HTML con el iframe
+  
   const webTar = `
     <!DOCTYPE html>
     <html>
     <head>
-      <title>Sitio en Construcción</title>
+      <title>Checkout</title>
     </head>
     <body>
       <!-- Aquí está el iframe que recibe los parámetros de la URL -->

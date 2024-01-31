@@ -16,13 +16,29 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+function formatearCorreo(cadena) {
+    // Reemplazar puntos y guiones por espacios en blanco
+    var cadenaFormateada = cadena.replace(/[.-]/g, ' ');
+
+    // Eliminar todo lo que está después del arroba
+    cadenaFormateada = cadenaFormateada.split('@')[0];
+
+    // Convertir la primera letra de cada palabra a mayúscula
+    cadenaFormateada = cadenaFormateada.replace(/\b\w/g, function (l) {
+        return l.toUpperCase();
+    });
+
+    return cadenaFormateada;
+}
+
+ 
   
 
 async function EnviarMail(titular, productos, total, envPrecio, precio, dir, nombre, mail, fecha, sPostal, domiSN, seguimiento, linkImgMail, PaginaWeb, phone) {
   var year = new Date().getFullYear();
   var descuento = 0;
   const info = await transporter.sendMail({
-    from: '"Zona Sneakers" <' + process.env.EMAIL + '>',
+    from: '"' + formatearCorreo(process.env.EMAIL) +'" <' + process.env.EMAIL + '>',
     to: mail,
     subject: "Información de pago y envío",
     text: "Preparando el pedido...",
