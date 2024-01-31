@@ -375,10 +375,10 @@
 
 	<!-- seteo ventana pago en efectivo, con variables globales -->
 	<script>
-		document.getElementById("imp").innerHTML = urlParams.get('CostoTotal') - descuento;
-		document.getElementById("imp2").innerHTML = urlParams.get('CostoTotal') - descuento;
+		document.getElementById("imp").innerHTML = urlParams.get('CostoTotal');
+		document.getElementById("imp2").innerHTML = urlParams.get('CostoTotal');
 		$(document).on('click', '#btnEfectivo', function (event) {
-			document.getElementById("imp").innerHTML = urlParams.get('CostoTotal') - descuento;
+			document.getElementById("imp").innerHTML = urlParams.get('CostoTotal');
 		});
 
 

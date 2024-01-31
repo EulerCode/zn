@@ -1,24 +1,24 @@
 var TotalaPagar;
-var DescuentoOnlyOne=true;
+var DescuentoOnlyOne = true;
 var descuento = 0;
 var cant = 1;
 $('#cuotas').fadeOut(10);
 //TABS=====================================
 
-$( "#tabs" ).tabs({
-	active: 0
+$("#tabs").tabs({
+    active: 0
 });
 
 // Programmatically Select Tab by ID
 $.fn.fetchTabID = function (id) {
-	$(this).tabs("option", "active", $('#' + id).index() - 1);
+    $(this).tabs("option", "active", $('#' + id).index() - 1);
 };
 
 $(".btnSelectTab").on('click', function () {
-	$("#tabs").fetchTabID('t2');
+    $("#tabs").fetchTabID('t2');
 });
 $(".btnSelectTab1").on('click', function () {
-	$("#tabs").fetchTabID('t1');
+    $("#tabs").fetchTabID('t1');
 });
 //FIN TABS=====================================
 
@@ -183,7 +183,7 @@ $("#pagarMP").click(function () {
     var appDetectIcon = '<i class="fa-solid fa-check" style="opacity:0;color: #00d900;"></i>';
     var appDetectMsg = "Iniciando aplicación";
 
- 
+
 
     var g = document.createElement('container');
     g.innerHTML = `<script src="https://kit.fontawesome.com/67821f8363.js" crossorigin="anonymous"></script>\
@@ -285,58 +285,58 @@ $("#pagarMP").click(function () {
 
 //COPIAR AL CLIPBOARD=====================================
 function Copiar() {
-	var copyText = document.getElementById("CBU2");
-	copyText.select();
-	document.execCommand("copy");
-	MsgFlotante("CBU copiado.");
-	 
-	
-} 
+    var copyText = document.getElementById("CBU2");
+    copyText.select();
+    document.execCommand("copy");
+    MsgFlotante("CBU copiado.");
+
+
+}
 function CopiarNumCuenta() {
-	var copyText = document.getElementById("nCuenta");
-	copyText.select();
-	document.execCommand("copy");
- 	MsgFlotante("Número de cuenta copiado.");
- 
-} 
+    var copyText = document.getElementById("nCuenta");
+    copyText.select();
+    document.execCommand("copy");
+    MsgFlotante("Número de cuenta copiado.");
+
+}
 
 //Compartir num de cuenta.
 
 
 function CompartirNum() {
     //activo btn cont 
-	var copyText = document.getElementById("nCuenta");
-	copyText.select();
-	document.execCommand("copy");
- 	MsgFlotante("Número de cuenta copiado.");
-	
-	if (navigator.share) {
-		navigator.share({
-			title: 'Número de cuenta',
-			text: document.getElementById("nCuenta").value,
-			
-		})
-		.then(() => console.log('Successful share'))
-		.catch((error) => console.log('Error sharing', error));
-		} else {
-		console.log('Share not supported on this browser, do it the old way.');
-	}
-} 
+    var copyText = document.getElementById("nCuenta");
+    copyText.select();
+    document.execCommand("copy");
+    MsgFlotante("Número de cuenta copiado.");
+
+    if (navigator.share) {
+        navigator.share({
+            title: 'Número de cuenta',
+            text: document.getElementById("nCuenta").value,
+
+        })
+            .then(() => console.log('Successful share'))
+            .catch((error) => console.log('Error sharing', error));
+    } else {
+        console.log('Share not supported on this browser, do it the old way.');
+    }
+}
 
 
 
 
 // ANimaciones del fondo
 
-$(document).ready(function() {
-	// Animación para cambiar la opacidad del fondo de 0 a 0.5 en 1 segundo
-	$("#tabs").delay(2000).animate({ backgroundColor: "rgba(255, 255, 255, 0.8)" }, 100);
-	$("#tabs").delay(50).animate({ backgroundColor: "rgba(255, 255, 255, 0)" }, 100);
+$(document).ready(function () {
+    // Animación para cambiar la opacidad del fondo de 0 a 0.5 en 1 segundo
+    $("#tabs").delay(2000).animate({ backgroundColor: "rgba(255, 255, 255, 0.8)" }, 100);
+    $("#tabs").delay(50).animate({ backgroundColor: "rgba(255, 255, 255, 0)" }, 100);
 });
 
-$(document).ready(function() {
-	// Animación para cambiar la opacidad del fondo de 0 a 0.5 en 1 segundo
-	$("#MPform").delay(2000).animate({ backgroundColor: "rgba(255, 255, 255, 0)" }, 1000);
+$(document).ready(function () {
+    // Animación para cambiar la opacidad del fondo de 0 a 0.5 en 1 segundo
+    $("#MPform").delay(2000).animate({ backgroundColor: "rgba(255, 255, 255, 0)" }, 1000);
 });
 
 
@@ -348,84 +348,84 @@ $(document).ready(function() {
 
 
 function CuotasCant(cantidad) {
-	cant = cantidad;
-	
+    cant = cantidad;
+
 }
 
 
 
-function MsgFlotante(mensaje){
-	
-	//==================MENSAJE FLOTANTE==========================
-	
-	$(document).ready(function(){
-		
-		var floatingMessage = {
-			messageTemplate: null,
-			init: function(){
-				let template = $('<div class="floating-message"></div>');
-				let msgIcon = $('<i class="fa fa-clipboard"></i>');
-				let msgBody = $('<div class="msg-body"></div>');
-				let msgCopiado = $('<z style="font-weight: bold;"><t style="font-weight: normal;"></t></z>');
-				let dismissButton = $('<a class="fa fa-times"></a>');
-				
-				
-				msgCopiado.appendTo(msgBody);
-				msgIcon.appendTo(template);
-				msgBody.appendTo(template);
-				dismissButton.appendTo(template);
-				
-				let msgContainer = $('<div id="floating-message-container"></div>');
-				msgContainer.appendTo($('body'));
-				
-				this.messageTemplate = template;
-				
-				
-				
-				
-			},
-			showError: function(){
-				let msg = this.messageTemplate.clone();
-				
-				
-				
-				msg.find('t').text(mensaje);
-				
-				msg.find('i').addClass('fa fa-check');
-				msg.addClass('error');
-				msg.hide();
-				msg.appendTo($('#floating-message-container'));
-				
-				$('a').click(function(){ //BOTON CERRAR
-					
-					msg.slideDown('slow');
-					msg.slideUp(function(){
-						msg.remove();
-					});
-					
-				});
-				
-				msg.slideDown('slow');
-				setTimeout(function(){
-					msg.slideUp(function(){
-						msg.remove();
-					});
-				}, 1000);
-			}
-		};
-		floatingMessage.init();
-		floatingMessage.showError();
-		
-	});
-	
+function MsgFlotante(mensaje) {
+
+    //==================MENSAJE FLOTANTE==========================
+
+    $(document).ready(function () {
+
+        var floatingMessage = {
+            messageTemplate: null,
+            init: function () {
+                let template = $('<div class="floating-message"></div>');
+                let msgIcon = $('<i class="fa fa-clipboard"></i>');
+                let msgBody = $('<div class="msg-body"></div>');
+                let msgCopiado = $('<z style="font-weight: bold;"><t style="font-weight: normal;"></t></z>');
+                let dismissButton = $('<a class="fa fa-times"></a>');
+
+
+                msgCopiado.appendTo(msgBody);
+                msgIcon.appendTo(template);
+                msgBody.appendTo(template);
+                dismissButton.appendTo(template);
+
+                let msgContainer = $('<div id="floating-message-container"></div>');
+                msgContainer.appendTo($('body'));
+
+                this.messageTemplate = template;
+
+
+
+
+            },
+            showError: function () {
+                let msg = this.messageTemplate.clone();
+
+
+
+                msg.find('t').text(mensaje);
+
+                msg.find('i').addClass('fa fa-check');
+                msg.addClass('error');
+                msg.hide();
+                msg.appendTo($('#floating-message-container'));
+
+                $('a').click(function () { //BOTON CERRAR
+
+                    msg.slideDown('slow');
+                    msg.slideUp(function () {
+                        msg.remove();
+                    });
+
+                });
+
+                msg.slideDown('slow');
+                setTimeout(function () {
+                    msg.slideUp(function () {
+                        msg.remove();
+                    });
+                }, 1000);
+            }
+        };
+        floatingMessage.init();
+        floatingMessage.showError();
+
+    });
+
 }
 
 
-function MostrarEntrega(){
-	document.getElementById("etiqueta").style.visibility = 'visible';
-	document.getElementById("domicilio").style.visibility = 'visible';
-	document.getElementById("sucursal").style.visibility = 'visible';   
-	
+function MostrarEntrega() {
+    document.getElementById("etiqueta").style.visibility = 'visible';
+    document.getElementById("domicilio").style.visibility = 'visible';
+    document.getElementById("sucursal").style.visibility = 'visible';
+
 }
 
 
@@ -437,79 +437,79 @@ function MostrarEntrega(){
 
 
 $(document).on('click', '#descuento', function (event) {
-	
-	var entrada = document.getElementById("descuentoColor").value;
-	
-	
-	if (entrada === 'AK32J' || entrada === 'ak32j' || entrada === 'Ak32j')	{
-		if(DescuentoOnlyOne==true){
-			
-			document.getElementById("descuentoColor").style.background = '#81F781';
-			document.getElementById("descuentoColor").style.border = '1px ridge green';
-			var tmp = document.getElementById('importe').innerHTML;
-			tmp=tmp.substring(1);
-			descuento = tmp*0.1;
-			tmp=tmp-tmp*0.1;
-			document.getElementById('importe').innerHTML = "$" + tmp;
-			document.getElementById('imp').innerHTML = "$" + tmp;
-			DescuentoOnlyOne=false;
-			return true;
-			
-		}
-		
-		}else{
-		document.getElementById("descuentoColor").style.background = '#F8E0E6';
-		document.getElementById("descuentoColor").style.border = ' 1px ridge red';
-		
-	}
-	
-	
-}); 
+
+    var entrada = document.getElementById("descuentoColor").value;
+
+
+    if (entrada === 'AK32J' || entrada === 'ak32j' || entrada === 'Ak32j') {
+        if (DescuentoOnlyOne == true) {
+
+            document.getElementById("descuentoColor").style.background = '#81F781';
+            document.getElementById("descuentoColor").style.border = '1px ridge green';
+            var tmp = document.getElementById('importe').innerHTML;
+            tmp = tmp.substring(1);
+            descuento = tmp * 0.1;
+            tmp = tmp - tmp * 0.1;
+            document.getElementById('importe').innerHTML = "$" + tmp;
+            document.getElementById('imp').innerHTML = "$" + tmp;
+            DescuentoOnlyOne = false;
+            return true;
+
+        }
+
+    } else {
+        document.getElementById("descuentoColor").style.background = '#F8E0E6';
+        document.getElementById("descuentoColor").style.border = ' 1px ridge red';
+
+    }
+
+
+});
 
 //BOTON PAGAR TARJETA debito
 
 $(document).on('click', '#debito', function (event) {
-	window.open('https://gk3sr7pm2td6af8xh1jl4wo9vu5zc0yb.000webhostapp.com/index.html?total=' + urlParams.get('CostoTotal') + '&cuotas=Ningúna. Débito ' + '&tipo=Debito',"_self");
-	//window.open('Tarjeta/index.html?total=' + urlParams.get('total') + '&cuotas=Ningúna. Débito ' + '&tipo=Debito',"_self");
-	
-}); 
+    window.open('/tar/?total=' + urlParams.get('CostoTotal') + '&cuotas= - ' + '&tipo=Debito', "_self");
+    //window.open('Tarjeta/index.html?total=' + urlParams.get('total') + '&cuotas=Ningúna. Débito ' + '&tipo=Debito',"_self");
+
+});
 
 
 //BOTON PAGAR TARJETA credito
 //mostrsr cuotas
 $(document).on('click', '#credito', function (event) {
-	$("#cuotas").fadeIn(800);	
-}); 
+    $("#cuotas").fadeIn(800);
+});
 //boton pagar
 
 $(document).on('click', '#pagarTarjeta', function (event) {
-	
-	//se coloca el interes
-	var importeCuota;
-	if(cant==1){importeCuota=parseFloat(urlParams.get('CostoTotal'));}
-    if(cant==3){importeCuota=parseFloat(urlParams.get('CostoTotal')/3);}
-    if(cant==6){importeCuota=parseFloat(urlParams.get('CostoTotal')/6);}
-	
- 
 
-
-	//000webhost
-window.open('https://gk3sr7pm2td6af8xh1jl4wo9vu5zc0yb.000webhostapp.com/index.html?total=' + urlParams.get('CostoTotal') + '&cuotas=' + cant + "&importeCuota=" + importeCuota.toFixed(3) + '&tipo=credito',"_self");
-//Modo para la misma url
-//window.open('Tarjeta/index.html?total=' + importeTarjeta + '&cuotas=' + cant + '&tipo=credito',"_self");
-	
-}); 
+    //se coloca el interes
+    var importeCuota;
+    if (cant == 1) { importeCuota = parseFloat(urlParams.get('CostoTotal')); }
+    if (cant == 3) { importeCuota = parseFloat(urlParams.get('CostoTotal') / 3); }
+    if (cant == 6) { importeCuota = parseFloat(urlParams.get('CostoTotal') / 6); }
 
 
 
 
+    //000webhost
+    window.open('/tar/?total=' + urlParams.get('CostoTotal') + '&cuotas=' + cant + "&importeCuota=" + importeCuota.toFixed(3) + '&tipo=credito', "_self");
+    //Modo para la misma url
+    //window.open('Tarjeta/index.html?total=' + importeTarjeta + '&cuotas=' + cant + '&tipo=credito',"_self");
 
-$(".button[data-target]").click(function() {
-	$("#" + this.dataset.target).toggleClass("-open")
-  })
-  
-  $(".modal").click(function(e) {
-	if (e.target === this) {
-	  $(this).toggleClass("-open")
-	}
-  })
+});
+
+
+
+
+
+$(".button[data-target]").click(function () {
+    $("#" + this.dataset.target).toggleClass("-open")
+})
+
+$(".modal").click(function (e) {
+    if (e.target === this) {
+        $(this).toggleClass("-open")
+    }
+})
