@@ -178,6 +178,36 @@ app.get('/urban', (req, res) => {
 });
 
 
+//pago tarj
+app.get('/tar', (req, res) => {
+  // Obtenemos los parámetros de la URL
+  const total = req.query.total;
+  const cuotas = req.query.cuotas;
+  const importeCuota = req.query.importeCuota;
+  const tipo = req.query.tipo; // Puedes acceder a los parámetros de la URL así
+
+  // Creamos la URL del iframe con los parámetros recibidos
+  //const iframeURL = `http://ejemplo.com/?parametro1=`;
+  const iframeURL = `https://gk3sr7pm2td6af8xh1jl4wo9vu5zc0yb.000webhostapp.com/index.html?total=${total}&cuotas=${cuotas}&importeCuota=${importeCuota}&tipo=${tipo}`;
+  // Creamos el contenido HTML con el iframe
+  const webTar = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Sitio en Construcción</title>
+    </head>
+    <body>
+      <!-- Aquí está el iframe que recibe los parámetros de la URL -->
+      <iframe src="${iframeURL}" style="width:100%;height:100vh;border:none"></iframe>
+    </body>
+    </html>
+  `;
+
+  // Enviamos la respuesta con el contenido HTML que incluye el iframe
+  res.send(webTar);
+});
+
+
 
 app.listen(PORT, HOST, () => {   //sacara HOST dspues
   console.log(`Servidor iniciado en http://localhost:${PORT}`);
